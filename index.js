@@ -12,28 +12,6 @@ app.proxy = true
 app.use(koaBody())
 
 // Ratelimit, prevent someone from abusing the demo site
-const limiter = new RateLimiterMemory({
-	points: 10,
-	duration: 3600
-})
-app.use(async (ctx, next) => {
-	let allowed = true
-	try {
-		await limiter.consume(ctx.ip)
-		await next()
-	} catch (e) {
-		ctx.status = 429
-		ctx.body = 'Too Many Requests'
-		allowed = false
-	}
-	console.log(
-		'Request IP: %s, Allowed: %s, Url: %s',
-		ctx.ip,
-		allowed,
-		ctx.url
-	)
-})
-
 // cors
 app.use(async (ctx, next) => {
 	await next()
