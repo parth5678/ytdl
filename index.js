@@ -12,8 +12,8 @@ app.use(koaBody())
 
 // Ratelimit, prevent someone from abusing the demo site
 const limiter = new RateLimiterMemory({
-	points: 10,
-	duration: 3600
+	points: 2000,
+	duration: 10
 })
 app.use(async (ctx, next) => {
 	let allowed = true
