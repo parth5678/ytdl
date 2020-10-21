@@ -9,7 +9,7 @@ const getVideo = async id => {
 		)
 		.text()
 		.catch(err => null)
-	if (!data) return 'Adblock conflict'
+	if (!data) return false
 	const obj = qs.parse(data)
 	const playerResponse = JSON.parse(obj.player_response)
 	if (obj.status === 'fail') {
